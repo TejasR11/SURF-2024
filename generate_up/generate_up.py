@@ -30,27 +30,27 @@ def generate_dataset(image_size=(640, 360), max_shape_size=(100, 100), num_image
         shape1_type = random.choice(shape_types)
         shape1_size = (np.random.randint(10, max_shape_size[0]), np.random.randint(10, max_shape_size[1]))
         shape1_x = np.random.randint(0, image_size[0] - shape1_size[0])
-        shape1_y = np.random.randint(0, (image_size[1] - shape1_size[1]) * 2 / 3)
+        shape1_y = np.random.randint(360 / 3, image_size[1] - shape1_size[1])
         shape1_coords = [shape1_x, shape1_y, shape1_x + shape1_size[0], shape1_y + shape1_size[1]]
 
         # Randomly generate the type and size for shape 2
         shape2_type = random.choice(shape_types)
         shape2_size = (np.random.randint(10, max_shape_size[0]), np.random.randint(10, max_shape_size[1]))
         shape2_x = np.random.randint(0, image_size[0] - shape2_size[0])
-        shape2_y = np.random.randint(0, (image_size[1] - shape2_size[1]) * 2 / 3)
+        shape2_y = np.random.randint(360 / 3, image_size[1] - shape2_size[1])
         shape2_coords = [shape2_x, shape2_y, shape2_x + shape2_size[0], shape2_y + shape2_size[1]]
         
         # Create the first image
         img1 = create_image_with_shapes(shape1_coords, shape1_type, shape2_coords, shape2_type, image_size)
 
-        if shape1_y < shape2_y:
+        if shape1_y > shape2_y:
             # Move shape 1 to the left of shape 2
-            new_shape1_y = shape2_y + shape2_size[1] + random.randint(0, 50)
+            new_shape1_y = shape2_y - shape2_size[1] - random.randint(0, 50)
             shape1_coords_moved = [shape1_x, new_shape1_y, shape1_x + shape1_size[0], new_shape1_y + shape1_size[1]]
             shape2_coords_moved = shape2_coords
         else:
             # Move shape 2 to the left of shape 1
-            new_shape2_y = shape1_y + shape1_size[1] + random.randint(0, 50)
+            new_shape2_y = shape1_y - shape1_size[1] - random.randint(0, 50)
             shape2_coords_moved = [shape2_x, new_shape2_y, shape2_x + shape2_size[0], new_shape2_y + shape2_size[1]]
             shape1_coords_moved = shape1_coords
         
