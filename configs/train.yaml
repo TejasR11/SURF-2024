@@ -77,12 +77,12 @@ model:
 data:
   target: main.DataModuleFromConfig
   params:
-    batch_size: 32
+    batch_size: 1
     num_workers: 2
     train:
       target: edit_dataset.EditDataset
       params:
-        path: /home/user/SURF-2024/physics_dataset
+        path: /home/user/SURF-2024-1/physics_dataset
         split: train
         min_resize_res: 256
         max_resize_res: 256
@@ -91,7 +91,7 @@ data:
     validation:
       target: edit_dataset.EditDataset
       params:
-        path: /home/user/SURF-2024/physics_dataset
+        path: /home/user/SURF-2024-1/physics_dataset
         split: val
         min_resize_res: 256
         max_resize_res: 256
